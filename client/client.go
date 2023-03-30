@@ -248,7 +248,7 @@ func (c *ApiKeyPayClient) OrderGet(ctx context.Context, nonce uint32, orderID ui
 
 func (c *ApiKeyPayClient) sendGetRequestWithQueryParams(ctx context.Context, endpoint string, params map[string]string, v interface{}) error {
 	query := c.mapParamsToQueryString(params)
-	link := fmt.Sprintf("%s/%s?%s", apiKeyPayHost, endpoint, query)
+	link := fmt.Sprintf("%s%s?%s", apiKeyPayHost, endpoint, query)
 	req, err := http.NewRequest("GET", link, http.NoBody)
 	if err != nil {
 		return err
