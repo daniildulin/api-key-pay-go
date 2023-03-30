@@ -182,12 +182,18 @@ func (c *ApiKeyPayClient) OrderValidate(ctx context.Context, nonce uint32, order
 
 func (c *ApiKeyPayClient) OrderPayInfo(ctx context.Context, nonce uint32, orderID uint64, paymentDetail bool) (*response.OrderPayInfo, error) {
 	endpoint := "/1/order-pay-info"
+
+	pd := "false"
+	if paymentDetail {
+		pd = "true"
+	}
+
 	params := map[string]string{
 		"nonce":    fmt.Sprintf("%d", nonce),
 		"order_id": fmt.Sprintf("%d", orderID),
 		"akey":     c.aKey,
 		"bkey":     c.bKey,
-		"pd":       fmt.Sprintf("%t", paymentDetail),
+		"pd":       pd,
 	}
 	var result response.OrderPayInfo
 
