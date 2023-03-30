@@ -281,6 +281,10 @@ func (c *ApiKeyPayClient) sendRequest(req *http.Request, v interface{}) error {
 		return errors.New(success.Message)
 	}
 
+	if success.Status == "card" {
+		return errors.New(success.Message)
+	}
+
 	if v != nil {
 		err = json.Unmarshal(success.Value, &v)
 	}
