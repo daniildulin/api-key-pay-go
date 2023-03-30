@@ -1,7 +1,7 @@
 package response
 
 type Order struct {
-	Vkey        interface{}   `json:"vkey"`
+	Vkey        string        `json:"vkey"`
 	StatusTitle string        `json:"status_title"`
 	Created     string        `json:"created"`
 	UpdateAt    string        `json:"updateAt"`
@@ -27,4 +27,11 @@ type OrderSuccessResponse struct {
 	ErrorName string `json:"errname,omitempty"`
 	Value     Order  `json:"value"`
 	ErrorCode int    `json:"errcode,omitempty"`
+}
+
+type OrdersValidate struct {
+	Status string `json:"status"`
+	Msg    string `json:"msg"`
+	Field  string `json:"field"`
+	Order  Order  `json:"Order"`
 }

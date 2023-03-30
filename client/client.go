@@ -169,11 +169,15 @@ func (c *ApiKeyPayClient) OrderValidate(ctx context.Context, nonce uint32, order
 		"akey":     c.aKey,
 		"bkey":     c.bKey,
 	}
-	var result response.Order
+	var result response.OrdersValidate
 
 	err := c.sendGetRequestWithQueryParams(ctx, endpoint, params, &result)
 
-	return &result, err
+	if result.Status == "card" {
+		return &result.Order, errors.New(result.Msg)
+	}
+
+	return &result.Order, err
 }
 
 func (c *ApiKeyPayClient) OrderPayInfo(ctx context.Context, nonce uint32, orderID uint64, paymentDetail bool) (*response.OrderPayInfo, error) {
@@ -283,13 +287,6 @@ func (c *ApiKeyPayClient) sendRequest(req *http.Request, v interface{}) error {
 
 	if v != nil {
 		err = json.Unmarshal(success.Value, &v)
-	}
-	if err != nil {
-		return err
-	}
-
-	if success.Status == "card" {
-		return errors.New(success.Message)
 	}
 
 	return err
