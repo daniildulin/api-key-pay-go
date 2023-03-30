@@ -221,6 +221,21 @@ func (c *ApiKeyPayClient) OrderCancel(ctx context.Context, nonce uint32, orderID
 	return err
 }
 
+func (c *ApiKeyPayClient) OrderGet(ctx context.Context, nonce uint32, orderID uint64) (*response.Order, error) {
+	endpoint := "/1/order-get"
+	params := map[string]string{
+		"nonce":    fmt.Sprintf("%d", nonce),
+		"order_id": fmt.Sprintf("%d", orderID),
+		"akey":     c.aKey,
+		"bkey":     c.bKey,
+	}
+	var result response.Order
+
+	err := c.sendGetRequestWithQueryParams(ctx, endpoint, params, &result)
+
+	return &result, err
+}
+
 func (c *ApiKeyPayClient) sendGetRequestWithQueryParams(ctx context.Context, endpoint string, params map[string]string, v interface{}) error {
 	query := c.mapParamsToQueryString(params)
 	link := fmt.Sprintf("%s/%s?%s", apiKeyPayHost, endpoint, query)
