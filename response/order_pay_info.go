@@ -6,7 +6,7 @@ type OrderPayInfo struct {
 	Extra   string             `json:"extra"`
 	Info    []OrderPayInfoItem `json:"info"`
 	Pd      []PaymentDetail    `json:"pd"`
-	OrderID int64              `json:"order_id"`
+	OrderID string             `json:"order_id"`
 }
 
 type OrderPayInfoItem struct {
