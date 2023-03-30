@@ -1,0 +1,8 @@
+.idea
+builds/
+vendor/
+tmp/
+media/
+.env
+*.private.*
+*.tmp.*

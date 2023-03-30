@@ -1,0 +1,59 @@
+### Информация для оплаты по заявке
+https://apikeypay.com/api/1/order-pay-info/?nonce={{nonce}}&akey={{akey}}&bkey={{bkey}}&order_id={{order_id}}&pd=true
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+
+### Проверить заявку
+https://apikeypay.com/api/1/order-validate/?nonce={{nonce}}&akey={{akey}}&bkey={{bkey}}&order_id={{order_id}}
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+
+### Создание заказа
+POST https://apikeypay.com/api/1/order-create/?bkey={{bkey}}
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+  "nonce": 4,
+  "akey": "1e971b8bca2e82c2b67cdf1b2be573fbcc949aa1ce12fc8d880b289214b00fbb",
+  "bkey": "at3r2o4p",
+  "Order": {
+    "ip": "159.69.52.38",
+    "HTTP_USER_AGENT": "Apache-HttpClient/4.5.13 (Java/17.0.6)",
+    "agreement": "yes",
+    "props": [
+      {
+        "name": "from_acc",
+        "value": "5228600566429983"
+      },
+      {
+        "name": "from_fio",
+        "value": "Иванов Иван Иванович"
+      },
+      {
+        "name": "email",
+        "value": "market@honee.app"
+      },
+      {
+        "name": "to_acc",
+        "value": "0x325131f30a0fe16639383af4343d8afae5713bac"
+      }
+    ],
+    "psid1": 8,
+    "psid2": 319,
+    "in": 25869.56,
+    "out": 320,
+    "direct": 1
+  },
+  "confirm": false,
+  "pay-info": false
+}
+
+### Направления обменов
+GET {{host}}/1/directions/?nonce={{nonce}}&akey={{akey}}&bkey={{bkey}}
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
