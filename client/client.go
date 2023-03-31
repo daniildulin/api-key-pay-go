@@ -287,12 +287,15 @@ func (c *ApiKeyPayClient) sendRequest(req *http.Request, v interface{}) error {
 		return err
 	}
 
-	if success.ErrorCode != 0 || success.ErrorName != "" {
-		return errors.New(success.Message)
-	}
-
 	if v != nil {
 		err = json.Unmarshal(success.Value, &v)
+	}
+	if err != nil {
+		return err
+	}
+
+	if success.ErrorCode != 0 || success.ErrorName != "" || success.Status == "error" {
+		return errors.New(success.Message)
 	}
 
 	return err
